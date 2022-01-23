@@ -7232,6 +7232,9 @@ qemuBuildCpuCommandLine(virCommandPtr cmd,
                     virBufferAddLit(&buf, ",kvm=off");
                 break;
 
+            case VIR_DOMAIN_KVM_DIRTY_RING:
+                break;
+
             /* coverity[dead_error_begin] */
             case VIR_DOMAIN_KVM_LAST:
                 break;

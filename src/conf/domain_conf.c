@@ -202,6 +202,7 @@ VIR_ENUM_IMPL(virDomainHyperv,
 VIR_ENUM_IMPL(virDomainKVM,
               VIR_DOMAIN_KVM_LAST,
               "hidden",
+              "dirty-ring",
 );
 
 VIR_ENUM_IMPL(virDomainMsrsUnknown,
@@ -4518,7 +4519,6 @@ virDomainDefPostParseMemtune(virDomainDefPtr def)
         }
     }
 }
-
 
 static int
 virDomainDefAddConsoleCompat(virDomainDefPtr def)
@@ -20492,6 +20492,48 @@ virDomainDefParseXML(xmlDocPtr xml,
                     def->kvm_features[feature] = value;
                     break;
 
+                case VIR_DOMAIN_KVM_DIRTY_RING:
+                    if (!(tmp = virXMLPropString(nodes[i], "state"))) {
+                        virReportError(VIR_ERR_XML_ERROR,
+                                       _("missing 'state' attribute for "
+                                         "KVM feature '%s'"),
+                                       nodes[i]->name);
+                        goto error;
+                    }
+
+                    if ((value = virTristateSwitchTypeFromString(tmp)) < 0) {
+                        virReportError(VIR_ERR_CONFIG_UNSUPPORTED,
+                                       _("invalid value of state argument "
+                                         "for KVM feature '%s'"),
+                                       nodes[i]->name);
+                        goto error;
+                    }
+
+                    VIR_FREE(tmp);
+                    def->kvm_features[feature] = value;
+
+                    def->dirty_ring_size = 4096;
+                    if ((tmp = virXMLPropString(nodes[i], "size"))) {
+                        if (virStrToLong_uip(tmp, NULL, 10,
+                                             &def->dirty_ring_size) < 0) {
+                            virReportError(VIR_ERR_INTERNAL_ERROR,
+                            _("incorrect size '%s', expecting positive integer"),
+                            tmp);
+                            goto error;
+                        }
+                    }
+
+                    if (((def->dirty_ring_size & (def->dirty_ring_size - 1)) != 0) ||
+                        def->dirty_ring_size < 1024 ||
+                        def->dirty_ring_size > 65536) {
+                        virReportError(VIR_ERR_XML_ERROR, "%s",
+                                       _("dirty ring must be power of 2 and ranges [1024, 65536]"));
+                        goto error;
+                    }
+
+                    VIR_FREE(tmp);
+                    break;
+
                 /* coverity[dead_error_begin] */
                 case VIR_DOMAIN_KVM_LAST:
                     break;
@@ -22694,6 +22736,26 @@ virDomainDefFeaturesCheckABIStability(virDomainDefPtr src,
                     return false;
                 }
 
+                break;
+            case VIR_DOMAIN_KVM_DIRTY_RING:
+                if (src->kvm_features[i] != dst->kvm_features[i]) {
+                    virReportError(VIR_ERR_CONFIG_UNSUPPORTED,
+                                   _("State of KVM feature '%s' differs: "
+                                     "source: '%s', destination: '%s'"),
+                                   virDomainKVMTypeToString(i),
+                                   virTristateSwitchTypeToString(src->kvm_features[i]),
+                                   virTristateSwitchTypeToString(dst->kvm_features[i]));
+                    return false;
+                }
+
+                if (src->dirty_ring_size != dst->dirty_ring_size) {
+                    virReportError(VIR_ERR_CONFIG_UNSUPPORTED,
+                                   _("dirty ring size of KVM feature '%s' differs: "
+                                     "source: '%d', destination: '%d'"),
+                                   virDomainKVMTypeToString(i),
+                                   src->dirty_ring_size, dst->dirty_ring_size);
+                    return false;
+                }
                 break;
 
             /* coverity[dead_error_begin] */
@@ -28195,6 +28257,14 @@ virDomainDefFormatFeatures(virBufferPtr buf,
                                           virDomainKVMTypeToString(j),
                                           virTristateSwitchTypeToString(
                                               def->kvm_features[j]));
+                    break;
+                case VIR_DOMAIN_KVM_DIRTY_RING:
+                    if (def->kvm_features[j] != VIR_TRISTATE_SWITCH_ABSENT) {
+                        virBufferAsprintf(&childBuf, "<%s state='%s' size='%d'/>\n",
+                                          virDomainKVMTypeToString(j),
+                                          virTristateSwitchTypeToString(def->kvm_features[j]),
+                                          def->dirty_ring_size);
+                    }
                     break;
 
                 /* coverity[dead_error_begin] */
