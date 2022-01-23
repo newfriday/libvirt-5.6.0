@@ -1,0 +1,58 @@
+%dir /usr/lib/debug
+%dir /usr/lib/debug/usr
+%dir /usr/lib/debug/usr/lib64
+%dir /usr/lib/debug/usr/lib64/libvirt
+%dir /usr/lib/debug/usr/lib64/libvirt/lock-driver
+%dir /usr/lib/debug/usr/lib64/libvirt/connection-driver
+%dir /usr/lib/debug/usr/lib64/libvirt/storage-backend
+%dir /usr/lib/debug/usr/lib64/libvirt/storage-file
+%dir /usr/lib/debug/usr/libexec
+%dir /usr/lib/debug/usr/sbin
+%dir /usr/lib/debug/usr/bin
+/usr/lib/debug/usr/lib64/libvirt.so.0.5006.0.debug
+/usr/lib/debug/usr/lib64/libvirt/lock-driver/lockd.so.debug
+/usr/lib/debug/usr/lib64/libvirt/lock-driver/sanlock.so.debug
+/usr/lib/debug/usr/lib64/libvirt/connection-driver/libvirt_driver_qemu.so.debug
+/usr/lib/debug/usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so.debug
+/usr/lib/debug/usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so.debug
+/usr/lib/debug/usr/lib64/libvirt/connection-driver/libvirt_driver_network.so.debug
+/usr/lib/debug/usr/lib64/libvirt/connection-driver/libvirt_driver_nwfilter.so.debug
+/usr/lib/debug/usr/lib64/libvirt/connection-driver/libvirt_driver_nodedev.so.debug
+/usr/lib/debug/usr/lib64/libvirt/connection-driver/libvirt_driver_secret.so.debug
+/usr/lib/debug/usr/lib64/libvirt/connection-driver/libvirt_driver_storage.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_fs.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_logical.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_iscsi.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_scsi.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_mpath.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_disk.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_rbd.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_gluster.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-file/libvirt_storage_file_fs.so.debug
+/usr/lib/debug/usr/lib64/libvirt/storage-file/libvirt_storage_file_gluster.so.debug
+/usr/lib/debug/usr/lib64/libvirt-qemu.so.0.5006.0.debug
+/usr/lib/debug/usr/lib64/libvirt-lxc.so.0.5006.0.debug
+/usr/lib/debug/usr/lib64/libvirt-admin.so.0.5006.0.debug
+/usr/lib/debug/usr/lib64/libnss_libvirt.so.2.debug
+/usr/lib/debug/usr/lib64/libnss_libvirt_guest.so.2.debug
+/usr/lib/debug/usr/lib64/libvirt.so.0.debug
+/usr/lib/debug/usr/lib64/libvirt.so.debug
+/usr/lib/debug/usr/lib64/libvirt-qemu.so.0.debug
+/usr/lib/debug/usr/lib64/libvirt-qemu.so.debug
+/usr/lib/debug/usr/lib64/libvirt-lxc.so.0.debug
+/usr/lib/debug/usr/lib64/libvirt-lxc.so.debug
+/usr/lib/debug/usr/lib64/libvirt-admin.so.0.debug
+/usr/lib/debug/usr/lib64/libvirt-admin.so.debug
+/usr/lib/debug/usr/libexec/libvirt_sanlock_helper.debug
+/usr/lib/debug/usr/libexec/libvirt_lxc.debug
+/usr/lib/debug/usr/libexec/libvirt_leaseshelper.debug
+/usr/lib/debug/usr/libexec/libvirt_parthelper.debug
+/usr/lib/debug/usr/libexec/libvirt_iohelper.debug
+/usr/lib/debug/usr/sbin/virtlogd.debug
+/usr/lib/debug/usr/sbin/virtlockd.debug
+/usr/lib/debug/usr/sbin/libvirtd.debug
+/usr/lib/debug/usr/bin/virsh.debug
+/usr/lib/debug/usr/bin/virt-admin.debug
+/usr/lib/debug/usr/bin/virt-login-shell.debug
+/usr/lib/debug/usr/bin/virt-host-validate.debug
+/usr/src/debug/libvirt-5.6.0

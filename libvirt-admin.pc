@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib64
+includedir=/usr/include
+datarootdir=${prefix}/share
+
+libvirt_admin_api=/usr/share/libvirt/api/libvirt-admin-api.xml
+
+Name: libvirt-admin
+Version: 5.6.0
+Description: libvirt admin library
+Libs: -L${libdir} -lvirt-admin
+Cflags: -I${includedir}

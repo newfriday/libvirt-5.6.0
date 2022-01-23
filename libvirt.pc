@@ -1,0 +1,19 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib64
+includedir=/usr/include
+datarootdir=${prefix}/share
+
+libvirt_api=/usr/share/libvirt/api/libvirt-api.xml
+
+# For compat with older versions - also present
+# in libvirt-qemu.pc / libvirt-lxc.pc
+libvirt_qemu_api=/usr/share/libvirt/api/libvirt-qemu-api.xml
+libvirt_lxc_api=/usr/share/libvirt/api/libvirt-lxc-api.xml
+
+Name: libvirt
+Version: 5.6.0
+Description: libvirt library
+Requires:
+Libs: -L${libdir} -lvirt
+Cflags: -I${includedir}
