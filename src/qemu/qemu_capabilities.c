@@ -537,6 +537,7 @@ VIR_ENUM_IMPL(virQEMUCaps,
               /* 335 */
               "bochs-display",
               "migration-file-drop-cache",
+              "accel",
     );
 
 
@@ -2736,6 +2737,7 @@ static struct virQEMUCapsCommandLineProps virQEMUCapsCommandLine[] = {
     { "sandbox", "elevateprivileges", QEMU_CAPS_SECCOMP_BLACKLIST },
     { "chardev", "fd", QEMU_CAPS_CHARDEV_FD_PASS },
     { "overcommit", NULL, QEMU_CAPS_OVERCOMMIT },
+    { "accel", NULL, QEMU_CAPS_ACCEL },
 };
 
 static int
